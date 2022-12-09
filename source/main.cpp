@@ -11,7 +11,7 @@ int main()
 {
   glfwInit();
   glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-  GLFWwindow* window = glfwCreateWindow(800, 600, "Bintana", nullptr, nullptr);
+  GLFWwindow* window = glfwCreateWindow(800, 600, "Bintana Game Engine", nullptr, nullptr);
 
   glm::mat4 matrix;
   glm::vec4 vec;
