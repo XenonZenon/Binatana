@@ -1,29 +1,39 @@
-#define GLFW_INCLUDE_VULKAN
-#include <GLFW/glfw3.h>
-#define GLM_FORCE_RADIANS
-#define GLM_FORCE_DEPTH_ZERO_TO_ONE
-#include <glm/vec4.hpp>
-#include <glm/mat4x4.hpp>
+#include <bintana/bintana.h>
 
-#include <iostream>
+class MyGame : public Game
+{
+public:
+    MyGame(){}
+    virtual ~MyGame(){}
+
+    void simula() override
+    {
+      std::cout <<  "Ang laro ay nagsimula..." << std::endl;
+    }
+    void bago() override
+    {
+      std::cout << "Ang laro ay gumagana..." << std::endl;
+    }
+    void dulo() override
+    {
+      std::cout << "Ang laro ay natapos..." << std::endl;
+    }
+};
 
 int main()
 {
-  glfwInit();
-  glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-  GLFWwindow* window = glfwCreateWindow(800, 600, "Bintana Game Engine", nullptr, nullptr);
+  Makina makina;
 
-  glm::mat4 matrix;
-  glm::vec4 vec;
-  auto test = matrix * vec;
+  Game* mygame = new MyGame();
 
-  while(!glfwWindowShouldClose(window))
+  try{
+    makina.simula();
+    makina.ikot(mygame);
+    makina.linis();
+  } catch (const std::exception &e)
   {
-    glfwPollEvents();
+    std::cerr << "Error::" << e.what() << std::endl;
   }
-
-  glfwDestroyWindow(window);
-  glfwTerminate();
 
   return 0;
 }
