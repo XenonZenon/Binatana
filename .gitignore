@@ -1,1 +1,3 @@
 libraries/
+*.exe
+*.o
