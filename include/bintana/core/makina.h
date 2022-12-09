@@ -1,6 +1,7 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
+#include <vulkan/vulkan.h>
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 
@@ -14,6 +15,7 @@ private:
   GLFWwindow*   bintana;
   GLFWcursor*   cursor;
   Variable vars;
+  VkInstance instance;
 
 public:
   Makina();

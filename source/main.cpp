@@ -8,15 +8,15 @@ public:
 
     void simula() override
     {
-      std::cout <<  "Ang laro ay nagsimula..." << std::endl;
+    
     }
     void bago() override
     {
-      std::cout << "Ang laro ay gumagana..." << std::endl;
+
     }
     void dulo() override
     {
-      std::cout << "Ang laro ay natapos..." << std::endl;
+
     }
 };
 

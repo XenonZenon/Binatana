@@ -1,6 +1,7 @@
 #ifndef BINTANA_H
 #define BINTANA_H
 
+#include <vulkan/vulkan.h>
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 #define GLM_FORCE_RADIANS
@@ -15,6 +16,7 @@
 #include <windows.h>
 #include <cstdlib>
 #include <stdexcept>
+#include <vector>
 #include <iostream>
 
 #endif
