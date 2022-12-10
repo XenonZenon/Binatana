@@ -8,7 +8,7 @@ public:
 
     void simula() override
     {
-    
+
     }
     void bago() override
     {
@@ -23,17 +23,16 @@ public:
 int main()
 {
   Makina makina;
-
   Game* mygame = new MyGame();
-
   try{
     makina.simula();
     makina.ikot(mygame);
     makina.linis();
-  } catch (const std::exception &e)
-  {
-    std::cerr << "Error::" << e.what() << std::endl;
+    delete(mygame);
   }
-
+  catch (const std::exception &e)
+  {
+    std::cerr << "MAY::MALI::" << e.what() << std::endl;
+  }
   return 0;
 }
