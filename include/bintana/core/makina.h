@@ -1,3 +1,10 @@
+///////////////////////////////
+/// Author: Jayson B. Abad  ///
+/// Company: Noysoft        ///
+/// Start Date: August 2022 ///
+/// Update: December 2022   ///
+///////////////////////////////
+
 #ifndef ENGINE_H
 #define ENGINE_H
 
@@ -14,8 +21,8 @@ class Makina
 private:
   GLFWwindow*   bintana;
   GLFWcursor*   cursor;
-  Variable vars;
-  VkInstance instance;
+  Variable      vars;
+  VkInstance    instance;
 
 public:
   Makina();

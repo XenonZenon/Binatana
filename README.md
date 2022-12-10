@@ -1,5 +1,5 @@
 # Bintana
-<h5>Windows OpenGL Game Engine Framework</h5>
+<h5>Vulkan Game Engine Framework</h5>
 
 ```req
 Requirements:

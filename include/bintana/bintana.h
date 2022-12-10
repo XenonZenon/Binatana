@@ -1,3 +1,10 @@
+///////////////////////////////
+/// Author: Jayson B. Abad  ///
+/// Company: Noysoft        ///
+/// Start Date: August 2022 ///
+/// Update: December 2022   ///
+///////////////////////////////
+
 #ifndef BINTANA_H
 #define BINTANA_H
 

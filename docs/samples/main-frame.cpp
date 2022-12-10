@@ -1,10 +1,3 @@
-///////////////////////////////
-/// Author: Jayson B. Abad  ///
-/// Company: Noysoft        ///
-/// Start Date: August 2022 ///
-/// Update: December 2022   ///
-///////////////////////////////
-
 #include <bintana/bintana.h>
 
 class MyGame : public Game
@@ -21,10 +14,6 @@ public:
     void bago() override
     {
 
-    }
-    void iguhit() override
-    {
-      
     }
     void dulo() override
     {
