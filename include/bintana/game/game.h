@@ -16,7 +16,7 @@ public:
   ~Game();
 
   virtual void simula();
-  virtual void bago();
+  virtual void bago(double);
   virtual void iguhit();
   virtual void dulo();
 

@@ -27,6 +27,9 @@ private:
 public:
   Makina();
   ~Makina();
+  void glfwinit();
+  void vulkaninit();
+  void periperals();
   void simula();
   void ikot(Game*);
   void linis();

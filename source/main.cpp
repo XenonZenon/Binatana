@@ -18,13 +18,13 @@ public:
     {
 
     }
-    void bago() override
+    void bago(double deltatime) override
     {
 
     }
     void iguhit() override
     {
-      
+
     }
     void dulo() override
     {

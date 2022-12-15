@@ -10,7 +10,7 @@
 Game::Game(){}
 
 void Game::simula(){}
-void Game::bago(){}
+void Game::bago(double deltatime){}
 void Game::iguhit(){}
 void Game::dulo(){}
 

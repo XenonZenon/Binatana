@@ -9,9 +9,44 @@
 
 Makina::Makina(){}
 
-void Makina::simula()
+const std::vector<const char*> validationlayers = { "VK_LAYER_KHRONOS_validation" };
+
+#ifndef NDEBUG
+  const bool enablevalidationlayers = false;
+#else
+  const bool enablevalidationlayers = true;
+#endif
+
+bool checkValidationLayerSupport()
 {
-  /// GLFW
+  uint32_t layercount;
+  vkEnumerateInstanceLayerProperties(&layercount, NULL);
+  std::vector<VkLayerProperties> availablelayers(layercount);
+  vkEnumerateInstanceLayerProperties(&layercount, availablelayers.data());
+
+  for(const char* layername : validationlayers)
+  {
+    bool layerfound = false;
+    for(const auto& layerproperties : availablelayers)
+    {
+      if(strcmp(layername, layerproperties.layerName) == 0)
+      {
+        layerfound = true;
+        break;
+      }
+    }
+
+    if(!layerfound)
+    {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+void Makina::glfwinit()
+{
   glfwInit();
   glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
   glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
@@ -36,8 +71,15 @@ void Makina::simula()
     std::cout << "Failed to create GLFW window" << std::endl;
     glfwTerminate();
   }
+}
 
-  /// VULKAN
+void Makina::vulkaninit()
+{
+  if(enablevalidationlayers && !checkValidationLayerSupport())
+  {
+    throw std::runtime_error("validation layers requested, but not available!");
+  }
+
   VkApplicationInfo appinfo{};
   appinfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
   appinfo.pApplicationName = "Bintana";
@@ -57,9 +99,19 @@ void Makina::simula()
   createInfo.ppEnabledExtensionNames = glfwExtensions;
   createInfo.enabledLayerCount = 0;
 
-  if(vkCreateInstance(&createInfo, NULL, &instance) != VK_SUCCESS)
+  if(vkCreateInstance(&createInfo, NULL, &this->instance) != VK_SUCCESS)
   {
     throw std::runtime_error("failed to create instance!");
+  }
+
+  if(enablevalidationlayers)
+  {
+    createInfo.enabledLayerCount = static_cast<uint32_t>(validationlayers.size());
+    createInfo.ppEnabledExtensionNames = validationlayers.data();
+  }
+  else
+  {
+    createInfo.enabledLayerCount = 0;
   }
 
   uint32_t extensionCount = 0;
@@ -80,7 +132,11 @@ void Makina::simula()
   {
     std::cout << '\t' << extension.extensionName << '\n';
   }
+}
 
+void Makina::periperals()
+{
+  /// CURSOR
   unsigned char pixels[16 * 16 * 4];
   memset(pixels, 0xab, sizeof(pixels));
 
@@ -92,6 +148,13 @@ void Makina::simula()
   this->cursor = glfwCreateCursor(&image, 0, 0);
   glfwSetCursor(this->bintana, this->cursor);
   glfwSetCursorPos(this->bintana, this->vars.getWidth() / 2, this->vars.getHeight() / 2);
+}
+
+void Makina::simula()
+{
+  this->glfwinit();
+  this->vulkaninit();
+  this->periperals();
 }
 
 void Makina::ikot(Game* game)
@@ -115,7 +178,7 @@ void Makina::ikot(Game* game)
     {
       deltatime--;
     }
-    game->bago();
+    game->bago(deltatime);
     game->iguhit();
     frames++;
     if(glfwGetTime() - timer > 1.0)
@@ -131,7 +194,7 @@ void Makina::ikot(Game* game)
 }
 void Makina::linis()
 {
-  vkDestroyInstance(instance, NULL);
+  vkDestroyInstance(this->instance, NULL);
   glfwDestroyWindow(this->bintana);
   glfwTerminate();
 }
