@@ -45,6 +45,22 @@ bool checkValidationLayerSupport()
   return true;
 }
 
+std::vector<const char*> getRequiredExtensions()
+{
+  uint32_t glfwextensioncount = 0;
+  const char** glfwextensions;
+
+  glfwextensions = glfwGetRequiredInstanceExtensions(&glfwextensioncount);
+  std::vector<const char*> extensions(glfwextensions, glfwextensions + glfwextensioncount);
+
+  if(enablevalidationlayers)
+  {
+    extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
+  }
+
+  return extensions;
+}
+
 void Makina::glfwinit()
 {
   glfwInit();
@@ -92,12 +108,9 @@ void Makina::vulkaninit()
   createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
   createInfo.pApplicationInfo = &appinfo;
 
-  uint32_t glfwExtensionCount = 0;
-  const char** glfwExtensions;
-  glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
-  createInfo.enabledExtensionCount = glfwExtensionCount;
-  createInfo.ppEnabledExtensionNames = glfwExtensions;
-  createInfo.enabledLayerCount = 0;
+  auto extensions = getRequiredExtensions();
+  createInfo.enabledExtensionCount = static_cast<uint32_t>(extensions.size());
+  createInfo.ppEnabledExtensionNames = extensions.data();
 
   if(vkCreateInstance(&createInfo, NULL, &this->instance) != VK_SUCCESS)
   {
@@ -114,24 +127,15 @@ void Makina::vulkaninit()
     createInfo.enabledLayerCount = 0;
   }
 
-  uint32_t extensionCount = 0;
-  vkEnumerateInstanceExtensionProperties(
-    NULL,
-    &extensionCount,
-    NULL
-  );
-  std::vector<VkExtensionProperties> extensions(extensionCount);
-  vkEnumerateInstanceExtensionProperties(
-    NULL,
-    &extensionCount,
-    extensions.data()
-  );
-
-  std::cout << "available extensions:\n";
-  for(const auto& extension : extensions)
-  {
-    std::cout << '\t' << extension.extensionName << '\n';
-  }
+  // VkDebugUtilsMessengerCreateInfoEXT createInfo{};
+  // createInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
+  // createInfo.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT |
+  //                              VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT |
+  //                              VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
+  // createInfo.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT |
+  //                          VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT;
+  // createInfo.pfnUserCallback = debugCallback;
+  // craeteInfo.pUserData = NULL;
 }
 
 void Makina::periperals()
@@ -192,8 +196,13 @@ void Makina::ikot(Game* game)
   }
   game->dulo();
 }
+
 void Makina::linis()
 {
+  // if(enablevalidationlayers)
+  // {
+  //   DestroyDebugUtilMessagerEXT(this->instance, debugMessanger, NULL);
+  // }
   vkDestroyInstance(this->instance, NULL);
   glfwDestroyWindow(this->bintana);
   glfwTerminate();

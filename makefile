@@ -1,5 +1,5 @@
+program := Bintana
 projdir := ../Bintana
-appname := Bintana
 include := $(projdir)/include
 source := $(projdir)/source
 build_objects := $(projdir)/build/objects
@@ -23,7 +23,7 @@ build: $(objects)
 	       $(build_objects)/makina.o \
 	       $(build_objects)/game.o \
 	       $(build_objects)/variables.o \
-	    -o $(build_debug)/$(appname) \
+	    -o $(build_debug)/$(program) \
 	    -L $(glfwlib) \
 	    -L $(vklib) \
 	       $(link)
@@ -61,11 +61,11 @@ variables.o:
 	    -o $(build_objects)/variables.o
 
 debug:
-	gdb $(build_debug)/$(appname)
+	gdb $(build_debug)/$(program)
 
 test:
-	$(build_debug)/$(appname)
+	$(build_debug)/$(program)
 
 clean:
-	del $(build_objects)\*.o
-	del $(build_debug)\*.exe
+	rm $(build_objects)/*.o
+	rm $(build_debug)/*.exe
