@@ -5,8 +5,8 @@ source := $(projdir)/source
 build_objects := $(projdir)/build/objects
 build_debug := $(projdir)/build/debug
 
-vklib := $(projdir)/libraries/VulkanSDK/1.3.231.1/Lib32
-vkinclude := $(projdir)/libraries/VulkanSDK/1.3.231.1/Include
+vklib := $(projdir)/libraries/vulkan/lib32
+vkinclude := $(projdir)/libraries/vulkan/include
 glfwlib := $(projdir)/libraries/glfw/lib
 glfwinclude := $(projdir)/libraries/glfw/include
 
