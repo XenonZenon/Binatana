@@ -63,10 +63,6 @@ void Makina::ikot()
 
 void Makina::linis()
 {
-  // if(enablevalidationlayers)
-  // {
-  //   DestroyDebugUtilMessagerEXT(this->instance, debugMessanger, NULL);
-  // }
   delete(this->game);
   this->window.linis();
   glfwDestroyWindow(this->window.getWindow());
