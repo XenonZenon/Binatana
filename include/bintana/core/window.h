@@ -23,11 +23,11 @@ public:
   Window(std::string, int, int);
   Window();
   ~Window();
+
+  void initialize();
   void setVulkan();
   void periperals();
-
   GLFWwindow* getWindow();
-
   void linis();
 
 };

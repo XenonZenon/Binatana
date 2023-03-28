@@ -11,7 +11,9 @@ class MyGame : public Game
 {
 
 public:
-    MyGame(std::string title, int width, int height){}
+    MyGame(std::string title, int width, int height)
+    : Game(title, width, height)
+    {}
 
     virtual ~MyGame(){}
 
@@ -35,9 +37,10 @@ public:
 int main()
 {
   try{
-    Game mygame = MyGame("Bintana", 1200, 620);
-    Makina makina = Makina(mygame);
-    makina.takbo(mygame);
+    Game* mygame = new MyGame("Bintana", 1200, 620);
+    Makina makina(mygame);
+    makina.run();
+    delete(mygame);
   }
   catch (const std::exception &e)
   {

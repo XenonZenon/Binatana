@@ -7,24 +7,26 @@
 
 #include <bintana/bintana.h>
 
-Makina::Makina(Game game)
+Makina::Makina(Game* game)
 {
+  this->game = game;
   this->window = Window(
-    game.getTitle(),
-    game.getWidth(),
-    game.getHeight()
+    game->getTitle(),
+    game->getWidth(),
+    game->getHeight()
   );
 }
 
 void Makina::simula()
 {
+  this->window.initialize();
   this->window.setVulkan();
   this->window.periperals();
 }
 
-void Makina::ikot(Game game)
+void Makina::ikot()
 {
-  game.simula();
+  this->game->simula();
 
   static double fps = 1.0f / 60.0f;
   double lasttime = glfwGetTime();
@@ -36,6 +38,7 @@ void Makina::ikot(Game game)
   while(!glfwWindowShouldClose(this->window.getWindow()))
   {
     glfwPollEvents();
+
     currenttime = glfwGetTime();
     deltatime += (currenttime - lasttime) / fps;
     lasttime = currenttime;
@@ -43,8 +46,8 @@ void Makina::ikot(Game game)
     {
       deltatime--;
     }
-    game.bago(deltatime);
-    game.iguhit();
+    this->game->bago(deltatime);
+    this->game->iguhit();
     frames++;
     if(glfwGetTime() - timer > 1.0)
     {
@@ -55,7 +58,7 @@ void Makina::ikot(Game game)
     }
     glfwSwapBuffers(this->window.getWindow());
   }
-  game.dulo();
+  this->game->dulo();
 }
 
 void Makina::linis()
@@ -64,15 +67,16 @@ void Makina::linis()
   // {
   //   DestroyDebugUtilMessagerEXT(this->instance, debugMessanger, NULL);
   // }
+  delete(this->game);
   this->window.linis();
   glfwDestroyWindow(this->window.getWindow());
   glfwTerminate();
 }
 
-void Makina::takbo(Game game)
+void Makina::run()
 {
   this->simula();
-  this->ikot(game);
+  this->ikot();
   this->linis();
 }
 

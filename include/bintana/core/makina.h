@@ -18,17 +18,16 @@
 class Makina
 {
 private:
+  Game* game;
   Window window;
 
 public:
-  Makina(Game);
+  Makina(Game*);
   ~Makina();
   void simula();
-  void ikot(Game);
+  void ikot();
   void linis();
-
-  void takbo(Game);
-
+  void run();
 };
 
 #endif

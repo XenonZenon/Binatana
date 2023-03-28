@@ -2,23 +2,31 @@
 
 Window::Window(std::string title, int width, int height)
 {
-  std::cout << this->width << std::endl;
+  this->title = title;
+  this->width = width;
+  this->height = height;
+}
+
+Window::Window(){}
+
+void Window::initialize()
+{
   glfwInit();
   glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
   glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
   this->window = glfwCreateWindow(
-    width,
-    height,
-    title.c_str(),
+    this->width,
+    this->height,
+    this->title.c_str(),
     NULL,
     NULL
   );
 
   glfwSetWindowMonitor(this->window, NULL,
-  (GetSystemMetrics(SM_CXSCREEN)/2) - (width/2),
-  (GetSystemMetrics(SM_CYSCREEN)/2) - (height/2),
-  width, height, GLFW_DONT_CARE);
+  (GetSystemMetrics(SM_CXSCREEN)/2) - (this->width/2),
+  (GetSystemMetrics(SM_CYSCREEN)/2) - (this->height/2),
+  this->width, this->height, GLFW_DONT_CARE);
 
   glfwShowWindow(this->window);
 
@@ -28,8 +36,6 @@ Window::Window(std::string title, int width, int height)
     glfwTerminate();
   }
 }
-
-Window::Window(){}
 
 const std::vector<const char*> validationlayers = { "VK_LAYER_KHRONOS_validation" };
 

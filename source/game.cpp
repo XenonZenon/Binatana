@@ -7,7 +7,6 @@
 
 #include <bintana/bintana.h>
 
-Game::Game(){}
 Game::Game(std::string title, int width, int height)
 {
   this->title = title;
