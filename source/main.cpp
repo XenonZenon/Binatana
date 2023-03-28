@@ -36,8 +36,12 @@ public:
 
 int main()
 {
+
+  const uint32_t WIDTH = 1200;
+  const uint32_t HEIGHT = 680;
+
   try{
-    Game* mygame = new MyGame("Bintana", 1200, 620);
+    Game* mygame = new MyGame("Bintana", WIDTH, HEIGHT);
     Makina makina(mygame);
     makina.run();
     delete(mygame);

@@ -98,7 +98,7 @@ void Window::setVulkan()
 
   VkApplicationInfo appinfo{};
   appinfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
-  appinfo.pApplicationName = "Bintana";
+  appinfo.pApplicationName = this->title.c_str();
   appinfo.applicationVersion = VK_MAKE_VERSION(0, 0, 1);
   appinfo.pEngineName = "Bintana";
   appinfo.engineVersion = VK_MAKE_VERSION(0, 0, 1);
@@ -140,18 +140,18 @@ void Window::setVulkan()
 
 void Window::periperals()
 {
-  /// CURSOR
-  // unsigned char pixels[16 * 16 * 4];
-  // memset(pixels, 0xab, sizeof(pixels));
-  //
-  // GLFWimage image;
-  // image.width = 16;
-  // image.height = 16;
-  // image.pixels = pixels;
-  //
-  // this->cursor = glfwCreateCursor(&image, 0, 0);
-  // glfwSetCursor(this->bintana, this->cursor);
-  // glfwSetCursorPos(this->bintana, this->vars.getWidth() / 2, this->vars.getHeight() / 2);
+  // CURSOR
+  unsigned char pixels[16 * 16 * 4];
+  memset(pixels, 0xab, sizeof(pixels));
+
+  GLFWimage image;
+  image.width = 16;
+  image.height = 16;
+  image.pixels = pixels;
+
+  this->cursor = glfwCreateCursor(&image, 0, 0);
+  glfwSetCursor(this->window, this->cursor);
+  glfwSetCursorPos(this->window, this->width / 2, this->height / 2);
 }
 
 GLFWwindow* Window::getWindow(){

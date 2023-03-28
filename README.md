@@ -1,5 +1,9 @@
 # Bintana
-<h5>Vulkan Game Engine Framework</h5>
+<h3>Vulkan Game Engine Framework</h3>
+<h4>Supported Platform</h4>
+<ul>
+  <li>Windows 10</li>
+</ul>
 
 ```req
 Requirements:
