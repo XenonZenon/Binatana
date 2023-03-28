@@ -14,7 +14,7 @@ c_flags := -O3 -Wall -std=c++17 -static-libstdc++ -static-libgcc
 windows_flag := -mwindows
 link := -lglfw3dll -lvulkan-1 -lgdi32 -luser32 -lkernel32
 
-objects := main.o makina.o game.o variables.o
+objects := main.o makina.o game.o window.o
 
 build: $(objects)
 	g++ -s \
@@ -22,7 +22,7 @@ build: $(objects)
 	       $(build_objects)/main.o \
 	       $(build_objects)/makina.o \
 	       $(build_objects)/game.o \
-	       $(build_objects)/variables.o \
+	       $(build_objects)/window.o \
 	    -o $(build_debug)/$(program) \
 	    -L $(glfwlib) \
 	    -L $(vklib) \
@@ -52,13 +52,13 @@ game.o:
 	       $(source)/game.cpp \
 	    -o $(build_objects)/game.o
 
-variables.o:
+window.o:
 	g++ -c \
 	    -I $(include) \
 	    -I $(vkinclude) \
 	    -I $(glfwinclude) \
-	       $(source)/variables.cpp \
-	    -o $(build_objects)/variables.o
+	       $(source)/window.cpp \
+	    -o $(build_objects)/window.o
 
 debug:
 	gdb $(build_debug)/$(program)
@@ -67,5 +67,5 @@ test:
 	$(build_debug)/$(program)
 
 clean:
-	rm $(build_objects)/*.o
-	rm $(build_debug)/*.exe
+	del ..\Bintana\build\objects\*.o
+	del ..\Bintana\build\debug\*.exe

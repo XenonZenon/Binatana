@@ -17,7 +17,7 @@
 #include <glm/mat4x4.hpp>
 
 #include <bintana/core/makina.h>
-#include <bintana/core/variables.h>
+#include <bintana/core/window.h>
 #include <bintana/game/game.h>
 
 #include <windows.h>

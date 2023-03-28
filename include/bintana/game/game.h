@@ -8,10 +8,18 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <string>
+
 class Game
 {
 
+private:
+  std::string title;
+  int width;
+  int height;
+
 public:
+  Game(std::string, int, int);
   Game();
   ~Game();
 
@@ -19,6 +27,10 @@ public:
   virtual void bago(double);
   virtual void iguhit();
   virtual void dulo();
+
+  std::string getTitle();
+  int getWidth();
+  int getHeight();
 
 };
 

@@ -12,27 +12,22 @@
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 
-#include <bintana/core/variables.h>
 #include <bintana/game/game.h>
+#include <bintana/core/window.h>
 
 class Makina
 {
-
 private:
-  GLFWwindow*   bintana;
-  GLFWcursor*   cursor;
-  Variable      vars;
-  VkInstance    instance;
+  Window window;
 
 public:
-  Makina();
+  Makina(Game);
   ~Makina();
-  void glfwinit();
-  void vulkaninit();
-  void periperals();
   void simula();
-  void ikot(Game*);
+  void ikot(Game);
   void linis();
+
+  void takbo(Game);
 
 };
 

@@ -9,8 +9,9 @@
 
 class MyGame : public Game
 {
+
 public:
-    MyGame(){}
+    MyGame(std::string title, int width, int height){}
 
     virtual ~MyGame(){}
 
@@ -28,19 +29,15 @@ public:
     }
     void dulo() override
     {
-
     }
 };
 
 int main()
 {
-  Makina makina;
-  Game* mygame = new MyGame();
   try{
-    makina.simula();
-    makina.ikot(mygame);
-    makina.linis();
-    delete(mygame);
+    Game mygame = MyGame("Bintana", 1200, 620);
+    Makina makina = Makina(mygame);
+    makina.takbo(mygame);
   }
   catch (const std::exception &e)
   {
