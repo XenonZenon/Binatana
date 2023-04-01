@@ -174,10 +174,10 @@ void Window::periperals()
   this->cursor = glfwCreateCursor(&image, 0, 0);
   glfwSetCursor(this->window, this->cursor);
   glfwSetCursorPos(this->window, this->width / 2, this->height / 2);
-}
-
-GLFWwindow* Window::getWindow(){
-
+}  
+    
+GLFWwindow* Window::getWindow()
+{
   return this->window;
 }
 
